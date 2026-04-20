@@ -1,0 +1,363 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="Ka5OUZMSIRYG-jgOJ9hN" name="Page-1">
+    <mxGraphModel dx="3870" dy="935" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" value="DCM Natural Language to SQL" vertex="1">
+          <mxGeometry height="40" width="860" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="bg1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f0ff;strokeColor=#9b7fe8;strokeWidth=1;dashed=1;verticalAlign=top;fontSize=11;fontColor=#6a3fbf;" value="" vertex="1">
+          <mxGeometry height="100" width="1580" x="30" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="bg1lbl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontStyle=1;fontColor=#6a3fbf;" value="LAYER 1 — ORCHESTRATION" vertex="1">
+          <mxGeometry height="20" width="220" x="38" y="144" as="geometry" />
+        </mxCell>
+        <mxCell id="bg2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4f8;strokeColor=#4a9bbe;strokeWidth=1;dashed=1;verticalAlign=top;fontSize=11;" value="" vertex="1">
+          <mxGeometry height="100" width="1580" x="30" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="bg2lbl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontStyle=1;fontColor=#1e6e8e;" value="LAYER 2 — ROUTING DECISION" vertex="1">
+          <mxGeometry height="20" width="220" x="38" y="274" as="geometry" />
+        </mxCell>
+        <mxCell id="bgA" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#43a047;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="400" width="730" x="30" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="bgAlbl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;fontStyle=1;fontColor=#2e7d32;" value="PATH A — DATA PRODUCT (High Confidence)" vertex="1">
+          <mxGeometry height="20" width="320" x="38" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="bgB" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="400" width="810" x="800" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="bgBlbl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontStyle=1;fontColor=#bf360c;" value="PATH B — CATALOG FALLBACK (Low / No Product Match)" vertex="1">
+          <mxGeometry height="20" width="380" x="808" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="bgShared" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00796b;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="100" width="1580" x="30" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="bgSharedLbl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=10;fontStyle=1;fontColor=#004d40;" value="SHARED — VALIDATION + EXECUTION" vertex="1">
+          <mxGeometry height="20" width="260" x="38" y="844" as="geometry" />
+        </mxCell>
+        <mxCell id="userQuery" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;arcSize=50;" value="&lt;b&gt;User Natural Language Query&lt;/b&gt;&lt;br/&gt;&lt;i&gt;e.g. &quot;Show me total revenue by region last quarter&quot;&lt;/i&gt;" vertex="1">
+          <mxGeometry height="56" width="440" x="590" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="orchestrator" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" value="&lt;b&gt;Agentic Query Orchestrator&lt;/b&gt;&lt;br/&gt;Intent classification · Multi-product detection · Query decomposition · Confidence scoring" vertex="1">
+          <mxGeometry height="60" width="760" x="430" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="routeDecision" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;Data Product Match?&lt;/b&gt;&lt;br/&gt;Vector similarity search on product index" vertex="1">
+          <mxGeometry height="80" width="300" x="660" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="vectorIdx" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="&lt;b&gt;Product Vector Index&lt;/b&gt;&lt;br/&gt;Product descriptions · Business glossary · Tags · Example queries" vertex="1">
+          <mxGeometry height="60" width="200" x="100" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="dcmCatalog" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="&lt;b&gt;DCM Full Catalog&lt;/b&gt;&lt;br/&gt;All DBs · Hive · RDBMS · Tables · Columns · Data types" vertex="1">
+          <mxGeometry height="80" width="230" x="1320" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;Data Product Retrieval&lt;/b&gt;&lt;br/&gt;Load product: schema, join graph, semantic metrics, business glossary" vertex="1">
+          <mxGeometry height="66" width="300" x="60" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;VQL Retrieval (Stage 2 RAG)&lt;/b&gt;&lt;br/&gt;Find top 3–5 verified NL→SQL examples&lt;br/&gt;by vector similarity from VQL index" vertex="1">
+          <mxGeometry height="70" width="300" x="60" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="vqlStore" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" value="&lt;b&gt;VQL Index&lt;/b&gt;&lt;br/&gt;Verified NL→SQL pairs&lt;br/&gt;per product" vertex="1">
+          <mxGeometry height="76" width="160" x="430" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;SQL Generation — LLM&lt;/b&gt;&lt;br/&gt;Few-shot prompting with VQL examples&lt;br/&gt;Semantic layer · Dialect-aware (Spark / Trino)&lt;br/&gt;Chain-of-thought join reasoning" vertex="1">
+          <mxGeometry height="80" width="300" x="60" y="634" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;arcSize=50;" value="&lt;b&gt;High Confidence Result&lt;/b&gt;&lt;br/&gt;🟢 Green badge — trusted output" vertex="1">
+          <mxGeometry height="50" width="300" x="60" y="746" as="geometry" />
+        </mxCell>
+        <mxCell id="b0" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="&lt;b&gt;Partial Product Match?&lt;/b&gt;&lt;br/&gt;Use product as anchor + extend to catalog" vertex="1">
+          <mxGeometry height="80" width="260" x="830" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="b1a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" value="&lt;b&gt;Partial Blend Mode&lt;/b&gt;&lt;br/&gt;Use product context as anchor&lt;br/&gt;Extend joins to unmapped tables via catalog" vertex="1">
+          <mxGeometry height="70" width="240" x="820" y="534" as="geometry" />
+        </mxCell>
+        <mxCell id="b1b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&lt;b&gt;Full Catalog Search (RAG)&lt;/b&gt;&lt;br/&gt;Vector search across all tables&lt;br/&gt;and column descriptions in DCM" vertex="1">
+          <mxGeometry height="70" width="240" x="1120" y="534" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&lt;b&gt;Schema Compression Pipeline&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Stage A:&lt;/b&gt; Table filtering — top 10–15 by vector sim&lt;br/&gt;&lt;b&gt;Stage B:&lt;/b&gt; Column pruning — relevance scoring, keep ~40%&lt;br/&gt;&lt;b&gt;Stage C:&lt;/b&gt; Relationship inference — heuristic FK detection" vertex="1">
+          <mxGeometry height="86" width="340" x="870" y="634" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="&lt;b&gt;SQL Generation — LLM (Fallback Mode)&lt;/b&gt;&lt;br/&gt;Wider context · Inferred joins flagged&lt;br/&gt;Self-consistency: 2–3 variants generated" vertex="1">
+          <mxGeometry height="70" width="340" x="870" y="746" as="geometry" />
+        </mxCell>
+        <mxCell id="confMed" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=50;" value="🟡 Medium — Data product, no VQL match" vertex="1">
+          <mxGeometry height="40" width="280" x="1270" y="634" as="geometry" />
+        </mxCell>
+        <mxCell id="confLow" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;arcSize=50;" value="🟠 Low — Catalog fallback, documented joins" vertex="1">
+          <mxGeometry height="40" width="280" x="1270" y="686" as="geometry" />
+        </mxCell>
+        <mxCell id="confVLow" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;arcSize=50;" value="🔴 Very Low — Inferred joins · User warned" vertex="1">
+          <mxGeometry height="40" width="280" x="1270" y="738" as="geometry" />
+        </mxCell>
+        <mxCell id="datafusion" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5ead8;strokeColor=#00796b;fontSize=12;" value="&lt;b&gt;Apache DataFusion — SQL Validation Layer&lt;/b&gt;&lt;br/&gt;Parse &amp; syntax check · Dry-run query plan · Dialect conversion (Spark SQL ↔ Trino SQL) · Preview on sample data" vertex="1">
+          <mxGeometry height="60" width="540" x="560" y="858" as="geometry" />
+        </mxCell>
+        <mxCell id="userReview" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="&lt;b&gt;User Review&lt;/b&gt;&lt;br/&gt;SQL preview · Confidence badge · Tables used · Inferred joins highlighted · Edit option · Confirm / Reject" vertex="1">
+          <mxGeometry height="60" width="540" x="560" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="trino" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="&lt;b&gt;Apache Spark / Trino&lt;/b&gt;&lt;br&gt;RDBMS · Object stores · Hive" vertex="1">
+          <mxGeometry height="60" width="200" x="730" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="results" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;Query Results&lt;/b&gt;&lt;br/&gt;Returned to user" vertex="1">
+          <mxGeometry height="56" width="200" x="730" y="1169" as="geometry" />
+        </mxCell>
+        <mxCell id="feedback" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;Feedback Capture&lt;/b&gt;&lt;br/&gt;👍 Promote to VQL&lt;br/&gt;👎 Flag for review&lt;br/&gt;📊 Auto-suggest Data Product" vertex="1">
+          <mxGeometry height="76" width="220" x="730" y="1270" as="geometry" />
+        </mxCell>
+        <mxCell id="clarify" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" value="&lt;b&gt;Clarification Request&lt;/b&gt;&lt;br/&gt;Ambiguous query — below confidence threshold&lt;br/&gt;Show candidate tables/products found&lt;br/&gt;Ask user to disambiguate" vertex="1">
+          <mxGeometry height="86" width="200" x="1390" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="userQuery" style="edgeStyle=orthogonalEdgeStyle;" target="orchestrator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="orchestrator" style="edgeStyle=orthogonalEdgeStyle;" target="routeDecision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="vectorIdx" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#6c8ebf;strokeWidth=2;" target="routeDecision">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="310" />
+              <mxPoint x="520" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3lbl" connectable="0" parent="e3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;" value="search" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="routeDecision" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;fontColor=#2e7d32;" target="a1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4lbl" connectable="0" parent="e4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=11;fontColor=#2e7d32;fontStyle=1;" value="YES — High confidence" vertex="1">
+          <mxGeometry relative="1" x="-0.5" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="routeDecision" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#e65100;fontColor=#e65100;" target="b0">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="320" />
+              <mxPoint x="960" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5lbl" connectable="0" parent="e5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=10;fontColor=#e65100;fontStyle=1;" value="NO / LOW — Fallback" vertex="1">
+          <mxGeometry relative="1" x="-0.5" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5b" edge="1" parent="1" source="routeDecision" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;dashed=1;strokeWidth=2;" target="clarify">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1410" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5blbl" connectable="0" parent="e5b" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;fontColor=#9673a6;" value="Nothing found" vertex="1">
+          <mxGeometry relative="1" x="-0.4" as="geometry">
+            <mxPoint x="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ea1" edge="1" parent="1" source="a1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea2" edge="1" parent="1" source="vqlStore" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;dashed=1;strokeWidth=2;" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea2lbl" connectable="0" parent="ea2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;horizontal=0;" value="few-shot examples" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ea3" edge="1" parent="1" source="a2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;" target="a3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea4" edge="1" parent="1" source="a3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2e7d32;" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eb0a" edge="1" parent="1" source="b0" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;" target="b1a">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="500" />
+              <mxPoint x="940" y="534" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb0albl" connectable="0" parent="eb0a" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=11;fontColor=#d79b00;fontStyle=1;" value="YES — partial" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb0b" edge="1" parent="1" source="b0" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" target="b1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1090" y="460" />
+              <mxPoint x="1240" y="460" />
+              <mxPoint x="1240" y="534" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb0blbl" connectable="0" parent="eb0b" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=11;fontColor=#b85450;fontStyle=1;" value="NO — full catalog" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb1c" edge="1" parent="1" source="dcmCatalog" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d79b00;strokeWidth=2;" target="b1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="440" />
+              <mxPoint x="1260" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb1clbl" connectable="0" parent="eb1c" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=10;horizontal=0;" value="table/col search" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint x="-54" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb2a" edge="1" parent="1" source="b1a" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="604" />
+              <mxPoint x="1040" y="604" />
+              <mxPoint x="1040" y="634" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb2b" edge="1" parent="1" source="b1b" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="604" />
+              <mxPoint x="1040" y="604" />
+              <mxPoint x="1040" y="634" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eb3" edge="1" parent="1" source="b2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ecm" edge="1" parent="1" source="b1a" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d6b656;strokeWidth=2;" target="confMed">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="570" />
+              <mxPoint x="1410" y="570" />
+              <mxPoint x="1410" y="654" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ecl" edge="1" parent="1" source="b2" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d79b00;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="confLow">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="706" />
+              <mxPoint x="1240" y="706" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ecvl" edge="1" parent="1" source="b3" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#b85450;strokeWidth=2;" target="confVLow">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="760" />
+              <mxPoint x="1240" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="em1" edge="1" parent="1" source="a4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#00796b;" target="datafusion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="820" />
+              <mxPoint x="610" y="820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="em2" edge="1" parent="1" source="b3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#00796b;" target="datafusion">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="860" />
+              <mxPoint x="1040" y="860" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edf" edge="1" parent="1" source="datafusion" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;" target="userReview">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eur2" edge="1" parent="1" source="userReview" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;" target="trino">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="1060" />
+              <mxPoint x="830" y="1060" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ex2" edge="1" parent="1" source="trino" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" target="results">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="1180" />
+              <mxPoint x="830" y="1180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eres" edge="1" parent="1" source="results" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" target="feedback">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="1270" />
+              <mxPoint x="830" y="1270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ereslbl" connectable="0" parent="eres" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;" value="user confirms/rejects" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="efb1" edge="1" parent="1" source="feedback" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d6b656;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="1308" />
+            </Array>
+            <mxPoint x="500" y="603" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="od9SclBZBIBslfOGcAgR-1" connectable="0" parent="efb1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];horizontal=0;" value="&lt;span style=&quot;color: rgb(214, 182, 86); font-weight: 700;&quot;&gt;promote to VQL on 👍&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0093" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="efb2" edge="1" parent="1" source="feedback" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#9673a6;strokeWidth=2;" target="orchestrator">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1720" y="1310" />
+              <mxPoint x="1720" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="efb2lbl" connectable="0" parent="efb2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;fontColor=#9673a6;fontStyle=1;horizontal=0;" value="auto-suggest Data Product creation" vertex="1">
+          <mxGeometry relative="1" x="-0.1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eclar" edge="1" parent="1" source="clarify" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#9673a6;strokeWidth=2;" target="userQuery">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1570" y="88" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eclarlbl" connectable="0" parent="eclar" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=12;fontColor=#9673a6;" value="ask user to clarify" vertex="1">
+          <mxGeometry relative="1" x="-0.3" as="geometry">
+            <mxPoint x="-135" y="-27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" value="&lt;b&gt;LEGEND&lt;/b&gt;&lt;br/&gt;🟢 High confidence — Data Product + VQL match&lt;br/&gt;🟡 Medium — Data Product, no VQL&lt;br/&gt;🟠 Low — Catalog fallback, documented joins&lt;br/&gt;🔴 Very Low — Inferred joins, user warned&lt;br/&gt;── Solid: primary flow&lt;br/&gt;- - Dashed: data lookup / feedback" vertex="1">
+          <mxGeometry height="130" width="300" x="-42" y="1290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
