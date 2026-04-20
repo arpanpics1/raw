@@ -1,0 +1,235 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="1 - Message Chunking" id="chunking">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title1" value="Pattern 1: Message Chunking" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="400" y="30" width="500" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Producer App -->
+        <mxCell id="prod" value="Producer Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Large Payload Box -->
+        <mxCell id="payload" value="Large Payload (3MB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="320" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from producer to payload -->
+        <mxCell id="e_prod_payload" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="prod" target="payload" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Chunker -->
+        <mxCell id="chunker" value="Chunker / Serializer&#xa;(Split into N chunks)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from producer to chunker -->
+        <mxCell id="e_prod_chunker" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="prod" target="chunker" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Kafka Broker -->
+        <mxCell id="kafka" value="Kafka Broker&#xa;(Max 1MB / message)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Chunk messages -->
+        <mxCell id="chunk1" value="Chunk 1/3&#xa;[msg-id | seq=1 | total=3 | data...]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="580" y="360" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="chunk2" value="Chunk 2/3&#xa;[msg-id | seq=2 | total=3 | data...]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="580" y="410" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="chunk3" value="Chunk 3/3&#xa;[msg-id | seq=3 | total=3 | data...]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="580" y="460" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows chunker to kafka -->
+        <mxCell id="e_chunker_kafka" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="chunker" target="kafka" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows kafka to chunks (publish) -->
+        <mxCell id="e_kafka_c1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="kafka" target="chunk1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_kafka_c2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="kafka" target="chunk2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_kafka_c3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="kafka" target="chunk3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Consumer -->
+        <mxCell id="consumer" value="Consumer Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="200" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Reassembler -->
+        <mxCell id="reassembler" value="Chunk Reassembler&#xa;(Buffer + Reorder + Merge)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="950" y="390" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows chunks to reassembler -->
+        <mxCell id="e_c1_re" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="chunk1" target="reassembler" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c2_re" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="chunk2" target="reassembler" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_c3_re" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="chunk3" target="reassembler" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Reassembler to consumer -->
+        <mxCell id="e_re_consumer" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="reassembler" target="consumer" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Reassembled Payload -->
+        <mxCell id="fullpayload" value="Full Reassembled Payload (3MB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="320" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_consumer_full" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="consumer" target="fullpayload" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Metadata Box -->
+        <mxCell id="meta_box" value="Each Chunk Header Contains:&#xa;• correlation-id (UUID)&#xa;• sequence number (e.g. 1 of 3)&#xa;• total chunk count&#xa;• payload slice (bytes)" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=8;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="440" width="240" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Note box -->
+        <mxCell id="note1" value="⚠️ Consumer must handle:&#xa;• Out-of-order chunks&#xa;• Missing / duplicate chunks&#xa;• Reassembly timeout" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=8;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="560" width="220" height="80" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram name="2 - Claim Check Pattern" id="claimcheck">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title2" value="Pattern 2: Claim Check Pattern (Reference-Based Messaging)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="280" y="30" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Producer App -->
+        <mxCell id="prod2" value="Producer Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Large Payload -->
+        <mxCell id="payload2" value="Large Payload (3MB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="65" y="360" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow producer to payload -->
+        <mxCell id="e2_prod_payload" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="prod2" target="payload2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- External Storage (S3/Redis) -->
+        <mxCell id="storage" value="External Object Store&#xa;(S3 / MinIO / Redis / MongoDB)" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1: Store Payload -->
+        <mxCell id="e2_store" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="prod2" target="storage" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_store" value="① Store large payload" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#9673a6;fontStyle=1;" vertex="1" connectable="0" parent="e2_store">
+          <mxGeometry x="-0.05" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- Step 2: Get reference back -->
+        <mxCell id="e2_ref" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" source="storage" target="prod2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_ref" value="② Return object key / URL" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#9673a6;fontStyle=1;" vertex="1" connectable="0" parent="e2_ref">
+          <mxGeometry x="-0.05" y="1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- Kafka Broker -->
+        <mxCell id="kafka2" value="Kafka Broker&#xa;(Max 1MB / message)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="560" y="270" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Tiny reference message -->
+        <mxCell id="refmsg" value="Reference Message (&lt;1KB)&#xa;{ msg-id, object-key, metadata }" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="555" y="440" width="230" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow producer to kafka -->
+        <mxCell id="e2_prod_kafka" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="prod2" target="kafka2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_kafkasend" value="③ Send tiny reference msg" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e2_prod_kafka">
+          <mxGeometry x="-0.1" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- Kafka to refmsg -->
+        <mxCell id="e2_kafka_refmsg" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="kafka2" target="refmsg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Consumer App -->
+        <mxCell id="consumer2" value="Consumer Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="270" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow refmsg to consumer -->
+        <mxCell id="e2_ref_consumer" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="refmsg" target="consumer2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_consume" value="④ Consume reference" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#6c8ebf;fontStyle=1;" vertex="1" connectable="0" parent="e2_ref_consumer">
+          <mxGeometry x="-0.1" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- Arrow consumer to storage (fetch) -->
+        <mxCell id="e2_consumer_storage" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="consumer2" target="storage" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_fetch" value="⑤ Fetch full payload by key" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#9673a6;fontStyle=1;" vertex="1" connectable="0" parent="e2_consumer_storage">
+          <mxGeometry x="0.2" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- Full Payload retrieved -->
+        <mxCell id="fullpayload2" value="Full Payload Retrieved (3MB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="380" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_consumer_fp" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="consumer2" target="fullpayload2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Storage options note -->
+        <mxCell id="note_storage" value="Storage Options:&#xa;• AWS S3 / GCS / Azure Blob → Durable, cheap&#xa;• Redis → Fast, short-lived data&#xa;• MinIO → On-premise S3-compatible&#xa;• MongoDB / PostgreSQL → Structured data" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=left;verticalAlign=top;spacingLeft=8;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="480" width="290" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Pros note -->
+        <mxCell id="note_pros" value="✅ Advantages:&#xa;• Kafka stays fast and lightweight&#xa;• No reassembly logic needed&#xa;• Payload stored durably&#xa;• Easy to audit / replay" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;spacingLeft=8;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- Cons note -->
+        <mxCell id="note_cons" value="⚠️ Considerations:&#xa;• Extra network hop to fetch payload&#xa;• External store adds infra complexity&#xa;• Need TTL / cleanup policy on store" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=8;rounded=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="320" y="600" width="260" height="80" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
