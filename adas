@@ -1,0 +1,7 @@
+Producer                  Storage (S3/Redis/DB)         Kafka            Consumer
+   |                              |                        |                  |
+   |-- Store payload ------------->|                        |                  |
+   |<-- Get reference (URL/key) --|                        |                  |
+   |-- Send reference (tiny msg) ----------------->|                  |
+   |                              |                        |-- reference -->|  |
+   |                              |<------- Fetch payload by reference -------|
