@@ -1,0 +1,123 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="SkAZOU4xOO8iFDWMDsGW" name="Page-1">
+    <mxGraphModel dx="1968" dy="925" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lane_input" parent="1" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;fontColor=#1a3a5c;horizontal=0;" value="INPUT" vertex="1">
+          <mxGeometry height="490" width="250" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data_profiling" parent="lane_input" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a3a6c;strokeColor=#0a2a5c;fontColor=#ffffff;fontSize=13;arcSize=12;shadow=1;gradientColor=#2a5aaa;" value="&lt;b&gt;Data Profiling&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="58" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_static" parent="1" style="swimlane;startSize=30;fillColor=#e1f3e1;strokeColor=#5a9e5a;fontStyle=1;fontSize=11;fontColor=#1a4a1a;horizontal=0;" value="STATIC RULE PATH" vertex="1">
+          <mxGeometry height="230" width="700" x="358" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="extract_standardize" parent="lane_static" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d6a1d;strokeColor=#0a4a0a;fontColor=#ffffff;fontSize=11;arcSize=12;shadow=1;gradientColor=#2d8a2d;" value="&lt;b&gt;Extract Information&lt;br&gt;from Data Profile&lt;br&gt;&amp; Suggest &lt;u&gt;Standardized Rules&lt;/u&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="180" x="410" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="static_rule" parent="lane_static" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2d7a2d;strokeColor=#1a5a1a;fontColor=#ffffff;fontSize=12;arcSize=12;shadow=1;gradientColor=#3da03d;" value="&lt;b&gt;Static Rule&lt;br&gt;Suggestion&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="140" x="210" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="lane_static" source="static_rule" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2d7a2d;strokeWidth=2.5;endArrow=block;endFill=1;" target="extract_standardize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_1" parent="lane_static" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#1a5a1a;fontStyle=1;" value="&lt;b&gt;① Static&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="80" x="60" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_dynamic" parent="1" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#c8a000;fontStyle=1;fontSize=11;fontColor=#4a3a00;horizontal=0;" value="DYNAMIC RULE PATH (LLM-ASSISTED)" vertex="1">
+          <mxGeometry height="240" width="750" x="308" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="label_2" parent="lane_dynamic" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#8b6508;fontStyle=1;" value="&lt;b&gt;② Dynamic&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="50" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_output" parent="1" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;fontColor=#5a1a1a;horizontal=0;" value="OUTPUT" vertex="1">
+          <mxGeometry height="480" width="680" x="1108" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dynamic_rule" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b8860b;strokeColor=#8b6508;fontColor=#ffffff;fontSize=12;arcSize=12;shadow=1;gradientColor=#d4a820;" value="&lt;b&gt;Dynamic Rule&lt;br&gt;Suggestion&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="140" x="388" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="raw_rule_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8a000;strokeColor=#8b7000;fontColor=#ffffff;fontSize=11;arcSize=12;shadow=1;gradientColor=#ddb800;" value="&lt;b&gt;Raw Rule&lt;br&gt;Suggestion&lt;/b&gt;&lt;br&gt;&lt;i&gt;(LLM)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="548" y="355" as="geometry" />
+        </mxCell>
+        <mxCell id="elastic_search" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7b4a00;strokeColor=#5a3500;fontColor=#ffffff;fontSize=11;arcSize=12;shadow=1;gradientColor=#9b6010;" value="&lt;b&gt;Retrieve Rules&lt;br&gt;from&lt;br&gt;Elastic Search&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="130" x="698" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="cross_encoder" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5a3500;strokeColor=#3a2000;fontColor=#ffffff;fontSize=11;arcSize=12;shadow=1;gradientColor=#7a5010;" value="&lt;b&gt;Filter &amp; Rerank&lt;br&gt;with&lt;br&gt;Cross Encoder&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="130" x="848" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="rerank_history" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8b1a1a;strokeColor=#6a0a0a;fontColor=#ffffff;fontSize=12;arcSize=12;shadow=1;gradientColor=#b02a2a;" value="&lt;b&gt;Rerank with&lt;br&gt;History&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="1148" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="existing_rules" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6a1a6a;strokeColor=#4a0a4a;fontColor=#ffffff;fontSize=12;arcSize=12;shadow=1;gradientColor=#902a90;" value="&lt;b&gt;Get Relevant&lt;br&gt;Existing Rules&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="1318" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="suggestion_summary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4a1a6a;strokeColor=#2a0a4a;fontColor=#ffffff;fontSize=11;arcSize=12;shadow=1;gradientColor=#6a2a8a;" value="&lt;b&gt;Suggestion Summary&lt;/b&gt;&lt;br&gt;Explain why rules are&lt;br&gt;suggested &amp; whether&lt;br&gt;rules are applicable&lt;br&gt;&lt;i&gt;(LLM)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="100" width="160" x="1498" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="final_output" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5a1a1a;strokeColor=#3a0a0a;fontColor=#ffffff;fontSize=15;arcSize=12;shadow=1;gradientColor=#8a2a2a;fontStyle=1;" value="&lt;b&gt;⬛  OUTPUT&lt;/b&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="1558" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="data_profiling" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2d7a2d;strokeWidth=2.5;endArrow=block;endFill=1;" target="static_rule">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="288" y="248" />
+              <mxPoint x="288" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="extract_standardize" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2d7a2d;strokeWidth=2.5;endArrow=block;endFill=1;" target="final_output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="data_profiling" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#c8a000;strokeWidth=2.5;endArrow=block;endFill=1;" target="dynamic_rule">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="dynamic_rule" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#c8a000;strokeWidth=2.5;endArrow=block;endFill=1;" target="raw_rule_llm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="raw_rule_llm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#c8a000;strokeWidth=2.5;endArrow=block;endFill=1;" target="elastic_search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="elastic_search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#7b4a00;strokeWidth=2.5;endArrow=block;endFill=1;" target="cross_encoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="cross_encoder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#8b1a1a;strokeWidth=2.5;endArrow=block;endFill=1;" target="rerank_history">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="rerank_history" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6a1a6a;strokeWidth=2.5;endArrow=block;endFill=1;" target="existing_rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="existing_rules" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4a1a6a;strokeWidth=2.5;endArrow=block;endFill=1;" target="suggestion_summary">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="suggestion_summary" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;strokeColor=#5a1a1a;strokeWidth=2.5;endArrow=block;endFill=1;" target="final_output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#aaaaaa;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="110" width="300" x="218" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;strokeColor=none;fillColor=none;" value="&lt;b&gt;LEGEND&lt;/b&gt;" vertex="1">
+          <mxGeometry height="20" width="100" x="233" y="578" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_static_box" parent="1" style="rounded=1;fillColor=#2d7a2d;strokeColor=#1a5a1a;" value="" vertex="1">
+          <mxGeometry height="14" width="20" x="233" y="605" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_static_label" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;strokeColor=none;fillColor=none;" value="Static Rule Path" vertex="1">
+          <mxGeometry height="22" width="150" x="260" y="601" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_dynamic_box" parent="1" style="rounded=1;fillColor=#c8a000;strokeColor=#8b7000;" value="" vertex="1">
+          <mxGeometry height="14" width="20" x="233" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_dynamic_label" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;strokeColor=none;fillColor=none;" value="Dynamic Rule Path (LLM)" vertex="1">
+          <mxGeometry height="22" width="180" x="260" y="626" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_output_box" parent="1" style="rounded=1;fillColor=#8a2a2a;strokeColor=#5a0a0a;" value="" vertex="1">
+          <mxGeometry height="14" width="20" x="233" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_output_label" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;strokeColor=none;fillColor=none;" value="Output &amp; Consolidation" vertex="1">
+          <mxGeometry height="22" width="180" x="260" y="651" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
