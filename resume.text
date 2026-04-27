@@ -1,0 +1,311 @@
+Data Quality Platform
+Multi-Column Rule Framework
+Technical Documentation & Examples
+
+
+
+Introduction
+This document describes the multi-column rule framework for the Data Quality Platform. Unlike single-column rules that validate one field in isolation, multi-column rules express relationships between two or more columns — enabling the platform to detect data quality issues that no single-column check can catch.
+
+What this document covers
+
+•	Part 1: Core multi-column rule types (6 categories)
+•	Part 2: Complex chained & compound rules
+•	Part 3: Advanced rule types (statistical, temporal, ML-based)
+•	Part 4: Rule execution architecture
+
+
+PART 1 — CORE MULTI-COLUMN RULE TYPES
+
+1. Cross-Column Comparison
+The simplest multi-column rule. Two columns are evaluated against each other using a relational operator. These rules are symmetric — neither column 'owns' the rule. Your rule mapping must store both columns and the operator.
+
+How it works
+The rule engine evaluates: column_A  <operator>  column_B. If the expression evaluates to false for any row, that row fails the rule.
+
+Supported operators
+Operator	Symbol	Description
+Less than or equal	<=	Column A must not exceed Column B
+Greater than or equal	>=	Column A must be at least Column B
+Not equal	!=	Columns must hold different values
+Equal	=	Columns must hold the same value
+
+Examples
+Column A	Operator	Column B	Business meaning
+start_date	<=	end_date	Contract cannot end before it starts
+min_salary	<=	max_salary	Salary band must be valid
+low_price	<=	high_price	Price range must not be inverted
+order_date	<=	ship_date	Cannot ship before order placed
+created_at	<=	updated_at	Record cannot be updated before creation
+
+Rule mapping schema
+rule_type:        cross_column_compare
+column_left:      start_date
+operator:         <=
+column_right:     end_date
+severity:         ERROR
+message:          end_date must be on or after start_date
+
+
+2. Conditional Dependency (If-Then Rules)
+The most common complex case. Column B is only validated when Column A satisfies a specified condition. Multiple conditions can be chained — this structure naturally forms a DAG (Directed Acyclic Graph) in your rule engine.
+
+Structure
+Simple:     IF column_A = <value>  THEN column_B <rule>
+Compound:   IF A = X AND B = Y  THEN C must match <pattern>
+Chained:    IF result_of_rule_1 = PASS  THEN apply rule_2
+
+Examples
+Condition (Column A)	Dependent check (Column B)	Description
+status = 'active'	end_date IS NOT NULL	Active records must have an end date
+is_verified = TRUE	verified_by IS NOT NULL	Verified records need an auditor
+payment_method = 'card'	card_last4 IS NOT NULL	Card payments need last 4 digits
+country = 'US'	state_code IN (US states)	US records must have a valid state
+order_type = 'return'	original_order_id IS NOT NULL	Returns must reference original order
+
+Chained conditional — example flow
+
+Check A
+status = active?	PASS →
+run check B	Check B
+end_date not null?	PASS →
+run check C	Check C
+end_date > today?
+
+Rule mapping schema
+rule_type:        conditional_dependency
+condition_column: status
+condition_value:  active
+target_column:    end_date
+target_rule:      not_null
+severity:         ERROR
+
+
+3. Computed / Derived Column Checks
+A value in one column must equal (within a configurable tolerance) an arithmetic expression computed from other columns. Tolerance thresholds are essential because floating-point arithmetic introduces small rounding errors.
+
+Formula syntax
+target_column = f(col1, col2, ...) ± tolerance
+
+Examples
+Target column	Expression	Tolerance	Domain
+total_amount	quantity × unit_price	± 0.01	Sales / invoicing
+tax_amount	subtotal × tax_rate	± 0.01	Finance
+discount_price	unit_price × (1 - discount_pct)	± 0.001	Retail
+bmi	weight_kg / (height_m × height_m)	± 0.05	Healthcare
+profit_margin	(revenue - cost) / revenue × 100	± 0.1	Finance
+age_years	DATEDIFF(today, date_of_birth) / 365.25	± 1 day	HR / CRM
+
+Why tolerance matters
+Without tolerance: 
+  0.1 + 0.2 = 0.30000000000000004  (IEEE 754 float)
+  Expected: 0.30  →  FAIL (false positive)
+
+With tolerance (± 0.01):
+  |0.30000000000000004 - 0.30| = 3.7e-17  <  0.01  →  PASS
+
+
+4. Referential Integrity Across Columns
+A value in one column determines the set of valid values in another column. This is a two-column dependent lookup — not a simple static list. The valid values for Column B depend on the specific value in Column A.
+
+Pattern
+column_B  IN  lookup(column_A)
+Where lookup(column_A) returns a dynamic set based on the value of Column A.
+
+Examples
+Driving column (A)	Dependent column (B)	Lookup logic
+country_code	state_code	state_code must be valid for given country_code
+country_code	phone_format	Phone format regex driven by country
+product_category	subcategory	Subcategory must belong to parent category
+currency_code	decimal_places	Currency dictates allowed decimal precision
+bank_id	branch_code	Branch must belong to given bank
+
+Implementation note
+The lookup table is typically stored as a reference dataset in your rule repository. For example, a country_state table maps each country code to its list of valid state/province codes. The rule engine performs a parameterised lookup at validation time, not a static enum check.
+
+
+5. Mutual Exclusion / Co-Presence
+These rules control which combination of columns must be filled, exactly one filled, or neither filled.
+
+Three variants
+Variant	Logic	Meaning
+XOR (exclusive or)	Exactly one of A, B must be non-null	Provide email OR phone, not both, not neither
+AND (co-presence)	Both A and B must be non-null together	If is_verified then verified_by must exist
+NOR (mutual exclusion)	At most one of A, B can be non-null	Cannot have both primary and secondary contact
+NAND (at least one null)	Not both A and B filled simultaneously	Override flag and auto-value cannot coexist
+
+Examples
+Columns	Variant	Rule description
+email, phone	XOR	Exactly one contact method required
+is_verified, verified_by, verified_date	AND	All three must be set or all three null
+discount_pct, discount_amount	XOR	Discount expressed as % or fixed, not both
+internal_id, external_id	OR	At least one identifier must be present
+manual_override, auto_calculated	NOR	Cannot have both flags set
+
+
+6. Cross-Row Aggregation
+The most architecturally complex rule type. Values across multiple rows must aggregate (sum, average, count) to match a header or summary row. This requires grouping logic — the rule engine must join detail rows to their parent.
+
+Pattern
+GROUP BY group_key
+ASSERT: AGG_FUNC(detail.column) = header.summary_column ± tolerance
+
+Examples
+Detail table	Header table	Aggregate check
+invoice_line.amount	invoice.total	SUM(line amounts) = invoice total
+order_item.qty	order.total_qty	SUM(item quantities) = order total qty
+payroll_detail.hours	payroll_header.total_hours	SUM(hours per employee) = header total
+batch_record.count	batch_header.expected_count	COUNT(records) = declared batch size
+
+Cross-row aggregation — visual
+
+Detail rows
+line 1:  $120.00
+line 2:  $ 45.50
+line 3:  $ 34.50
+SUM   =  $200.00	=	Header row
+invoice.total = $200.00
+
+PASS
+
+
+PART 2 — COMPLEX CHAINED & COMPOUND RULES
+
+Chained Rule Execution Model
+When rules depend on the results of other rules, you need a structured execution model. The recommended approach stores rules as a dependency graph and executes them in topological order.
+
+Three design principles
+
+Principle	Description	Implementation
+Dependency graph	Each rule declares which column results it consumes	Store depends_on_rule_ids[] per rule
+Topological execution	Upstream rules always run before downstream rules	BFS/DFS traversal of the DAG at runtime
+Result objects	Each rule produces pass/fail/warn + score	Downstream rules consume result as input
+
+Rule result object
+{
+  "rule_id":      "R_004",
+  "status":       "PASS" | "FAIL" | "WARN",
+  "score":        0.95,          // 0.0 to 1.0
+  "column":       "total_amount",
+  "row_id":       "ROW_12345",
+  "message":      "total_amount mismatch: 200.01 ≠ 200.00"
+}
+
+Example: compound rule chain
+
+R1: not null
+discount_pct	R2: range
+0 ≤ pct ≤ 1	R3: computed
+final = price×(1-pct)	R4: compare
+final ≤ price
+
+R3 only executes if R1 and R2 both pass. R4 only executes if R3 passes. If R1 fails, R2, R3, and R4 are all skipped — saving compute and avoiding misleading downstream errors.
+
+Rule mapping table for chained rules
+Rule ID	Type	Columns	Depends on
+R1	Not null	discount_pct	—
+R2	Range check	discount_pct	R1
+R3	Computed check	final_price, unit_price, discount_pct	R2
+R4	Cross-column compare	final_price <= unit_price	R3
+
+
+PART 3 — ADVANCED RULE TYPES
+
+7. Statistical Correlation Rules
+Instead of checking fixed values, statistical rules check the relationship between two columns against a learned or declared baseline. This is the only rule type that can catch issues no hand-written rule could anticipate.
+
+How it works
+•	Compute a statistical measure (Pearson r, Spearman, Z-score) between two columns on a reference dataset
+•	Record the baseline metric and an acceptable deviation threshold
+•	On each new batch, recompute the metric and compare to baseline
+•	Flag the batch if the metric deviates beyond the threshold
+
+Example — Pearson correlation drift
+Setup (training data):
+  Pearson(transaction_amount, account_age) = 0.72
+  Threshold: deviation > 0.20 triggers WARNING
+
+Batch A (new data):
+  Pearson = 0.69  →  deviation = 0.03  →  PASS
+
+Batch B (suspicious data):
+  Pearson = 0.21  →  deviation = 0.51  →  FAIL (data drift)
+
+Supported metrics
+Metric	Use case	Sensitivity
+Pearson correlation (r)	Linear relationships between numeric columns	High — assumes normal distribution
+Spearman rank correlation	Monotonic relationships, non-normal data	Medium — robust to outliers
+Z-score per column pair	Detecting outliers in bivariate space	High — flags individual rows
+Kolmogorov-Smirnov test	Distribution shift between two column samples	High — catches distributional changes
+Mutual information	Any relationship type (including non-linear)	Low — harder to threshold
+
+
+8. Temporal Sequence / State Machine Rules
+A row's current value in Column B is only valid given the history of Column A's previous values. This enforces state machine transitions — preventing illegal state jumps in time-series or event-sourced data.
+
+Example — order lifecycle state machine
+
+draft
+initial state	submitted
+after review	approved
+after approval	shipped
+after dispatch	delivered
+terminal state
+
+Valid transitions:
+  draft → submitted
+  submitted → approved | rejected
+  approved → shipped
+  shipped → delivered | returned
+
+Invalid transitions (must fail):
+  draft → shipped         (skipped submitted + approved)
+  delivered → submitted   (backwards transition)
+  approved → draft        (regression to prior state)
+
+Implementation requirements
+•	The rule engine must join each row against the most recent prior snapshot for that entity
+•	A transition matrix defines which (from_state, to_state) pairs are valid
+•	Timestamps are compared to detect out-of-order events
+•	This is the most architecturally complex rule — it requires historical data access at validation time
+
+Transition matrix
+From state	Allowed next states	Forbidden transitions
+draft	submitted	approved, shipped, delivered, returned
+submitted	approved, rejected	draft, shipped, delivered
+approved	shipped, cancelled	draft, submitted, delivered
+shipped	delivered, returned	draft, submitted, approved, cancelled
+delivered	(none — terminal)	all transitions
+
+
+PART 4 — RULE EXECUTION ARCHITECTURE
+
+Rule Repository Schema
+Each rule in the repository stores the following fields regardless of rule type:
+
+Field	Type	Description
+rule_id	VARCHAR	Unique identifier for the rule
+rule_type	ENUM	cross_compare | conditional | computed | referential | co_presence | aggregation | statistical | state_machine
+column_list	ARRAY<VARCHAR>	All columns involved in this rule
+expression	TEXT	The rule logic (SQL expression, formula, or config JSON)
+depends_on_rule_ids	ARRAY<VARCHAR>	Rule IDs that must pass before this rule executes
+tolerance	DECIMAL	Allowed deviation for computed/statistical rules (nullable)
+severity	ENUM	ERROR | WARNING | INFO
+active	BOOLEAN	Whether the rule is enabled
+
+Execution Order Summary
+At runtime, the rule engine executes rules in this order for each batch:
+
+Phase	Rules executed	Notes
+1 — Isolation	Single-column rules (nulls, types, ranges)	No cross-column dependencies
+2 — Comparison	Cross-column compare, co-presence	Requires both columns present
+3 — Conditional	Conditional dependency rules	Reads Phase 1 results as gating condition
+4 — Computed	Derived column checks	Requires Phase 1+2 to have passed
+5 — Referential	Lookup-based rules	May require external reference dataset join
+6 — Aggregation	Cross-row aggregate rules	Requires full group to be loaded
+7 — Statistical	Correlation, drift rules	Batch-level, not row-level
+8 — State machine	Temporal sequence rules	Requires historical snapshot join
+
+
+
+End of documentation. All rule types described are additive — implementing layers 1-6 delivers the core platform, layers 7-8 are advanced enhancements.
