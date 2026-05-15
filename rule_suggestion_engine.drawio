@@ -1,0 +1,197 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="Ai_-WrWL3JDX8wzJaiJA" name="Page-1">
+    <mxGraphModel dx="915" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1a1a2e;" value="Rule Suggestion &amp; Rule Improvement Engine" vertex="1">
+          <mxGeometry height="40" width="860" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_inputs" parent="1" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" value="Input Sources" vertex="1">
+          <mxGeometry height="460" width="220" x="30" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="given_table" parent="lane_inputs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" value="📋 Given Table&#xa;(Source Data)" vertex="1">
+          <mxGeometry height="60" width="180" x="20" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="data_profiling" parent="lane_inputs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="🔍 Data Profiling&#xa;Engine&#xa;(Statistics, Nulls, Patterns,&#xa;Distributions, Types)" vertex="1">
+          <mxGeometry height="80" width="180" x="20" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="dcm" parent="lane_inputs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="🗂️ Data Catalog&#xa;Management (DCM)&#xa;(Business Metadata,&#xa;Definitions, Ownership)" vertex="1">
+          <mxGeometry height="80" width="180" x="20" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="recurrent_note" parent="lane_inputs" style="shape=mxgraph.flowchart.start_2;fillColor=#ffe6cc;strokeColor=#d79b00;whiteSpace=wrap;html=1;fontSize=10;" value="🔄 Recurrent Data Profiling&#xa;(Scheduled Re-check)" vertex="1">
+          <mxGeometry height="50" width="180" x="20" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="lane_inputs" source="given_table" style="edgeStyle=orthogonalEdgeStyle;" target="data_profiling">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_rule_id" parent="1" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" value="Rule Identification Layer" vertex="1">
+          <mxGeometry height="460" width="440" x="290" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dispatcher" parent="lane_rule_id" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="⚙️ Column-Level&#xa;Rule Dispatcher&#xa;(Per Column Analysis)" vertex="1">
+          <mxGeometry height="80" width="160" x="150" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="static_path_label" parent="lane_rule_id" style="text;html=1;align=center;fontStyle=2;fontSize=10;fontColor=#006EAF;" value="PATH 1: Static Rule Detection" vertex="1">
+          <mxGeometry height="20" width="190" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="static_rule" parent="lane_rule_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="Static Rule Matcher&lt;br&gt;&lt;br&gt;• Fixed Patterns&lt;br&gt;• Regex / Format Checks&lt;br&gt;• NULL / NOT NULL&lt;br&gt;• Range / Referential&lt;br&gt;• Enum Checks" vertex="1">
+          <mxGeometry height="120" width="190" x="10" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_path_label" parent="lane_rule_id" style="text;html=1;align=center;fontStyle=2;fontSize=10;fontColor=#6a0dad;" value="PATH 2: LLM-Assisted Detection" vertex="1">
+          <mxGeometry height="20" width="190" x="250" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="llm_box" parent="lane_rule_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="LLM Model&lt;br&gt;&lt;br&gt;• Understands semantics&lt;br&gt;• Infers business rules&lt;br&gt;• Uses Profiling + DCM&lt;br&gt;  context as prompt" vertex="1">
+          <mxGeometry height="120" width="190" x="240" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="nomatch_label" parent="lane_rule_id" style="text;html=1;align=center;fontSize=9;fontColor=#27AE60;fontStyle=1;" value="Rule Found" vertex="1">
+          <mxGeometry height="20" width="100" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="nomatch_label2" parent="lane_rule_id" style="text;html=1;align=center;fontSize=9;fontColor=#E74C3C;fontStyle=1;" value="Non Static Match" vertex="1">
+          <mxGeometry height="20" width="130" x="280" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="merge_node" parent="lane_rule_id" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" value="Candidate Rule&#xa;Descriptions" vertex="1">
+          <mxGeometry height="60" width="160" x="150" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="lane_rule_id" source="dispatcher" style="edgeStyle=orthogonalEdgeStyle;" target="static_rule">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="lane_rule_id" source="dispatcher" style="edgeStyle=orthogonalEdgeStyle;" target="llm_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="lane_rule_id" source="static_rule" style="edgeStyle=orthogonalEdgeStyle;" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="lane_rule_id" source="llm_box" style="edgeStyle=orthogonalEdgeStyle;" target="merge_node">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="step1" parent="lane_rule_id" style="text;html=1;fontSize=9;fontColor=#555555;fontStyle=2;" value="① Table ingested &amp; profiled" vertex="1">
+          <mxGeometry height="20" width="50" x="-30" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_rag" parent="1" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" value="RAG System &amp; Reranking Layer" vertex="1">
+          <mxGeometry height="460" width="390" x="770" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vector_db" parent="lane_rag" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="🗄️ Rule Repository&#xa;(Vector DB)&#xa;&#xa;Embedded Rules,&#xa;Descriptions &amp; Metadata" vertex="1">
+          <mxGeometry height="90" width="110" x="190" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cross_encoder" parent="lane_rag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="⚖️ Cross-Encoder Reranking&#xa;&#xa;Semantic Similarity Score&#xa;between Query &amp; Retrieved&#xa;Rule Candidates" vertex="1">
+          <mxGeometry height="90" width="210" x="140" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="usage_rerank" parent="lane_rag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="📊 Usage &amp; History-Based&#xa;Reranking (Per Column)&#xa;&#xa;• Past Rule Usage Frequency&#xa;• Historical Execution Results&#xa;• Column-level Fit Score" vertex="1">
+          <mxGeometry height="100" width="210" x="140" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="rule_history" parent="lane_rag" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="📁 Rule Usage &amp;&#xa;Execution History Store" vertex="1">
+          <mxGeometry height="80" width="100" x="10" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="final_rules" parent="lane_rag" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="🏆 Final Ranked&#xa;Rule Suggestions" vertex="1">
+          <mxGeometry height="40" width="160" x="165" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="lane_rag" source="vector_db" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="cross_encoder">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="245.00000000000023" y="130" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="lane_rag" source="cross_encoder" style="edgeStyle=orthogonalEdgeStyle;" target="usage_rerank">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="lane_rag" source="rule_history" style="edgeStyle=orthogonalEdgeStyle;" target="usage_rerank">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="lane_rag" source="usage_rerank" style="edgeStyle=orthogonalEdgeStyle;" target="final_rules">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" parent="lane_rag" style="text;html=1;fontSize=9;fontColor=#555555;fontStyle=2;rotation=270;" value="③ Semantic search + reranking" vertex="1">
+          <mxGeometry height="60" width="60" x="10" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_output" parent="1" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" value="User Presentation Layer" vertex="1">
+          <mxGeometry height="460" width="370" x="1200" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rule_presentation" parent="lane_output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="📝 Rule Suggestion&#xa;Presentation UI&#xa;&#xa;• Suggested Rule per Column&#xa;• Confidence Score&#xa;• Explanation / Reasoning&#xa;• Supporting Evidence" vertex="1">
+          <mxGeometry height="100" width="200" x="85" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="user_review" parent="lane_output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="👤 User Review &amp; Approval&#xa;&#xa;Accept / Reject / Modify&#xa;Suggested Rules" vertex="1">
+          <mxGeometry height="80" width="200" x="85" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="improvement_alert" parent="lane_output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="🔔 Rule Improvement Alert&#xa;&#xa;Recurrent Profiling detected&#xa;data drift or pattern change.&#xa;Existing rules may need update!" vertex="1">
+          <mxGeometry height="100" width="200" x="85" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="lane_output" source="rule_presentation" style="edgeStyle=orthogonalEdgeStyle;" target="user_review">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="lane_output" source="improvement_alert" style="edgeStyle=orthogonalEdgeStyle;" target="user_review">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" parent="lane_output" style="text;html=1;fontSize=9;fontColor=#555555;fontStyle=2;" value="④ Present to user with reasoning" vertex="1">
+          <mxGeometry height="30" width="140" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prof_disp" edge="1" parent="1" source="data_profiling" style="edgeStyle=orthogonalEdgeStyle;dashed=0;fontSize=9;fontStyle=1;" target="dispatcher" value="Profiling Insights">
+          <mxGeometry relative="1" x="0.375" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="270" y="270" />
+              <mxPoint x="270" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_dcm_disp" edge="1" parent="1" source="dcm" style="edgeStyle=orthogonalEdgeStyle;dashed=0;fontSize=9;fontStyle=1;" target="dispatcher" value="Business Metadata">
+          <mxGeometry relative="1" x="0.4783" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="280" y="400" />
+              <mxPoint x="280" y="170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_merge_sem" edge="1" parent="1" source="merge_node" style="edgeStyle=orthogonalEdgeStyle;fontSize=9;fontStyle=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="vector_db" value="Rule Candidates&#xa;for Retrieval">
+          <mxGeometry relative="1" x="0.552" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="750" y="430" />
+              <mxPoint x="750" y="165" />
+            </Array>
+            <mxPoint x="920" y="129.9999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_final_pres" edge="1" parent="1" source="final_rules" style="edgeStyle=orthogonalEdgeStyle;fontSize=9;fontStyle=1;" target="rule_presentation" value="Ranked Rules">
+          <mxGeometry relative="1" x="0.5044" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1240" y="510" />
+              <mxPoint x="1240" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_recurrent_alert" edge="1" parent="1" source="recurrent_note" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d79b00;fontSize=9;" target="improvement_alert" value="Drift Detected?">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="575" />
+              <mxPoint x="1385" y="575" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_recurrent_prof" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d79b00;fontSize=9;" target="data_profiling" value="Re-profile">
+          <mxGeometry relative="1" x="0.3898" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="40" y="495" />
+              <mxPoint x="40" y="340" />
+              <mxPoint x="140" y="340" />
+            </Array>
+            <mxPoint x="50" y="495" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_user_history" edge="1" parent="1" source="user_review" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#82b366;fontSize=9;" target="rule_history" value="Update Usage History">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="320" />
+              <mxPoint x="1270" y="560" />
+              <mxPoint x="830" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step2" parent="1" style="text;html=1;fontSize=9;fontColor=#555555;fontStyle=2;" value="② Split by static vs LLM path" vertex="1">
+          <mxGeometry height="60" width="60" x="430" y="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
