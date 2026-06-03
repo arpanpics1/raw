@@ -1,0 +1,21 @@
+import pyautogui
+import time
+import random
+
+print("Stay Active script running. Press Ctrl+C to stop.")
+
+while True:
+    # Move mouse slightly in a small random direction
+    x, y = pyautogui.position()
+    pyautogui.moveTo(x + random.randint(-5, 5), y + random.randint(-5, 5), duration=0.5)
+    print(f"Mouse moved at {time.strftime('%H:%M:%S')}")
+    time.sleep(60)  # Move every 60 seconds
+
+
+while ($true) {
+    $pos = [System.Windows.Forms.Cursor]::Position
+    [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(($pos.X + 1), $pos.Y)
+    Start-Sleep -Seconds 55
+    [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(($pos.X), $pos.Y)
+    Start-Sleep -Seconds 5
+}
